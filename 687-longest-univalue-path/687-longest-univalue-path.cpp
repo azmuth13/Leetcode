@@ -21,18 +21,31 @@ public:
 //     }
     
     int HH = 0;
-
+        
+    map <TreeNode* , int> mp;
+    
+    
     int helper(TreeNode* root, int val)
     {
-        if(!root || root->val != val)
+        if(!root)
             return 0;
         
-        int l = helper(root->left, val);
-        int r = helper(root->right, val);
-        
-        HH = max(HH, l+r);
-        
-        return max(l, r) + 1;
+        if(root->val == val)
+        {
+            int l = helper(root->left, val);
+            int r = helper(root->right, val);
+            HH = max(HH, l+r+1);
+            return 1 + max(l,r);
+        }
+        else
+        {
+            int l = helper(root->left, root->val);
+            int r = helper(root->right, root->val);
+            
+            HH = max(HH, l+r+1);
+            
+            return 0;
+        }
     }
     
     int longestUnivaluePath(TreeNode* root) {
@@ -40,14 +53,9 @@ public:
         if(!root)
             return 0;
         
-        HH = 0;
-        
         helper(root, root->val);
-        int ans = HH;
-        int ansL = longestUnivaluePath(root->left);
-        int ansR = longestUnivaluePath(root->right);
         
-        return max(ans, max(ansL, ansR));
+        return HH-1;
         
     }
 };
