@@ -24,15 +24,11 @@ public:
             return;
         }
         
-        string rr = temp;
         temp += to_string(root->val);
         temp += "->";
         
-        
         helper(root->left, ans, temp);
         helper(root->right, ans, temp);
-        
-        temp = rr;
     }
     
     vector<string> binaryTreePaths(TreeNode* root) {
