@@ -12,24 +12,7 @@
 class Solution {
 public:
     
-//     TreeNode* res;
-//     map <int, int> mp;
-//     TreeNode* helper(vector <int> &pre, vector <int> &ino, int i, int l, int r)
-//     {
-//         if(l >= r)
-//             return NULL;
-        
-        
-//         int ind = mp[pre[i]];
-//         TreeNode* root = new TreeNode(pre[i]);
-        
-//         root->left = helper(pre, ino, l, l, ind-1);
-//         root->right = helper(pre, ino, ind+1, ind+1, r);
-        
-//         return root;
-//     }
-    
-    
+
     TreeNode* solve(vector <int> &pre, vector <int> &ino, int i)
     {
         
@@ -61,7 +44,7 @@ public:
         }
         
        
-        map <int, int> f,g;
+        unordered_map <int, int> f,g;
         for(auto x : right)
             f[x]++;
         
