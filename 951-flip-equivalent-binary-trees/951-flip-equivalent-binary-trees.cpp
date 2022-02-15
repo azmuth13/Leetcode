@@ -15,12 +15,12 @@ public:
 
     bool flipEquiv(TreeNode* root1, TreeNode* root2) {
         
-        if(root1 == root2)
+        if(root1==NULL && root2 == NULL)
             return true;
-            
+        
         if(!root1 || !root2)
             return false;
-        
+
         bool ans = (root1->val == root2->val);
         
         if(!ans)
