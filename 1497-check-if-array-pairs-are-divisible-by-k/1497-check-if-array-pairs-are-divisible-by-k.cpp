@@ -2,7 +2,7 @@ class Solution {
 public:
     bool canArrange(vector<int>& arr, int k) {
         
-        map <int, int> mp;
+        unordered_map <int, int> mp;
         int n = arr.size();
         for(int i = 0; i < n; i++)
         {
@@ -16,12 +16,17 @@ public:
         if(mp[0]&1)
             return false;
         auto x = mp.begin();
-        x++;
+        //x++;
         
         
         while(x != mp.end())
         {
             int val = k - x->first;
+            if(val == k)
+            {
+                x++;
+                continue;
+            }
             
             if(mp[val] != mp[x->first])
                 return false;
