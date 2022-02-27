@@ -63,12 +63,13 @@ class Solution{
             
         int i = l, j = r;
         
-        while(i < j)
-        {
-            swap(arr[i], arr[j]);
-            i++, j--;
-        }
-        i = l, j = r;
+        // while(i < j)
+        // {
+        //     swap(arr[i], arr[j]);
+        //     i++, j--;
+        // }
+        // i = l, j = r;
+        
         while(i < j)
         {
             int ind = rand()%(j-i);
