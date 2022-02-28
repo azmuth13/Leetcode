@@ -2,15 +2,11 @@ class Solution {
 public:
     
     int racecar(int target) {
-        ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
         
         int ans = 0;
         
         queue < pair <int, int> > q;
-        //set < pair <ll, ll> > vis;
-        
-        //unordered_map < ll, unordered_map <ll, bool> > vis;
-        
+
         unordered_map <string, int> vis;
         
         q.push(make_pair(0,1));
