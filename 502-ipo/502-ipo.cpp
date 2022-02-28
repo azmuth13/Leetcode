@@ -12,10 +12,9 @@ public:
             vp[i].second = profits[i];
         }
         
-        
         sort(vp.begin(), vp.end());
         
-        priority_queue < pair <int, int> > pq;
+        priority_queue < int > pq;
         
         int ans = 0;
         
@@ -28,7 +27,7 @@ public:
             
             while(i < n && vp[i].first <= w)
             {
-                pq.push({vp[i].second,vp[i].first});
+                pq.push(vp[i].second);
                 i++;
             }
             
@@ -41,16 +40,16 @@ public:
             
             while(pq.size() > 0 && curr > w)
             {
-                auto tt = pq.top();
+                int tt = pq.top();
                 pq.pop();
                 
-                w += tt.first;
+                w += tt;
                 k--;
                 
                 if(k == 0)
                     break;
             }
-            //i++;
+           
             if(k == 0)
                 break;
         }
