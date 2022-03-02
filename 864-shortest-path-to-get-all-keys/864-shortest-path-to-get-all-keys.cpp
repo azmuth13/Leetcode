@@ -61,9 +61,9 @@ public:
         int dir2[] = {0, 0, -1, 1};
         
         queue < vector <int> > q;
-        //   x, y, keys, set steps
+        //   x, y, keys, set
         
-        q.push({sx, sy, 0, 0, 0});
+        q.push({sx, sy, 0, 0});
         
         int ans = 0;
         
@@ -88,14 +88,11 @@ public:
                 
                 if(keysYet == keys)
                 {
-                    //print(v);
-                    return v[4];
+                    return ans;
                 }
 
                 vis[x][y][set] = 1;
-                
-                //print(v);
-                
+
                 for(int h = 0; h < 4; h++)
                 {
                     int nx = x + dir1[h];
@@ -110,28 +107,23 @@ public:
                     if(grid[nx][ny] >= 'a' && grid[nx][ny] <= 'z')
                     {
                         int num = grid[nx][ny] - 'a';
+                        
                         bool f = !(set & (1 << num));
                         
-                        // if(!(set&(1<<num)))
-                        //     q.push({nx, ny, keysYet+1, set|(1<<num), v[4]+1});
-                        
-                        //if(!vis[nx][ny][set | (1 << num)])
-                            q.push({nx, ny, keysYet + f, set|(1<<num), v[4]+1});
-                        
+                        q.push({nx, ny, keysYet + f, set|(1<<num)});
                     }
                     else if(grid[nx][ny] >= 'A' && grid[nx][ny] <= 'Z')
                     {
                         int num = grid[nx][ny] - 'A';
-                        //&& !vis[nx][ny][set]
-                        if(set & (1<<num) )
+                        
+                        if(set & (1<<num))
                         {
-                            q.push({nx,ny, keysYet, set, v[4] + 1});
+                            q.push({nx,ny, keysYet, set});
                         }
                     }
                     else
                     {
-                       // if(!vis[nx][ny][set])
-                            q.push({nx,ny,keysYet,set, v[4] + 1});
+                        q.push({nx,ny,keysYet,set});
                     }
                 }
             }
