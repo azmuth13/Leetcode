@@ -111,22 +111,26 @@ public:
                     {
                         int num = grid[nx][ny] - 'a';
                         bool f = !(set & (1 << num));
-                        if(!vis[nx][ny][set | (1 << num)])
+                        
+                        // if(!(set&(1<<num)))
+                        //     q.push({nx, ny, keysYet+1, set|(1<<num), v[4]+1});
+                        
+                        //if(!vis[nx][ny][set | (1 << num)])
                             q.push({nx, ny, keysYet + f, set|(1<<num), v[4]+1});
                         
                     }
                     else if(grid[nx][ny] >= 'A' && grid[nx][ny] <= 'Z')
                     {
                         int num = grid[nx][ny] - 'A';
-                
-                        if(set & (1<<num) && !vis[nx][ny][set])
+                        //&& !vis[nx][ny][set]
+                        if(set & (1<<num) )
                         {
                             q.push({nx,ny, keysYet, set, v[4] + 1});
                         }
                     }
                     else
                     {
-                        if(!vis[nx][ny][set])
+                       // if(!vis[nx][ny][set])
                             q.push({nx,ny,keysYet,set, v[4] + 1});
                     }
                 }
