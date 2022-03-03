@@ -21,11 +21,8 @@ public:
         
         if(dp[i][sum] != -1)
         return dp[i][sum];
-        
-        bool ans1 = helper(arr, i+1, n, sum-arr[i], dp);
-        bool ans2 = helper(arr, i+1, n, sum, dp);
-        
-        return dp[i][sum] = (ans1|ans2);
+
+        return dp[i][sum] = (helper(arr, i+1, n, sum-arr[i], dp)|helper(arr, i+1, n, sum, dp));
     }
 
     bool isSubsetSum(int N, int arr[], int sum){
@@ -43,7 +40,6 @@ public:
         bool ans = helper(arr, 0, N, sum, dp);
         
         return ans;
-        
     }
 };
 
