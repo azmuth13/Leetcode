@@ -10,17 +10,13 @@ using namespace std;
 class Solution{   
 public:
     
-    
     bool helper(int arr[], int i, int n, int sum, int ** dp)
     {
-        if(sum == 0)
-        return true;
+        if(sum == 0) return true;
         
-        if(i == n)
-        return false;
+        if(i == n) return false;
         
-        if(dp[i][sum] != -1)
-        return dp[i][sum];
+        if(dp[i][sum] != -1) return dp[i][sum];
 
         return dp[i][sum] = (helper(arr, i+1, n, sum-arr[i], dp)|helper(arr, i+1, n, sum, dp));
     }
@@ -38,7 +34,6 @@ public:
         }
         
         bool ans = helper(arr, 0, N, sum, dp);
-        
         return ans;
     }
 };
