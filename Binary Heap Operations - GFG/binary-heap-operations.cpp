@@ -108,6 +108,11 @@ void MinHeap::deleteKey(int i)
     // Your code here
     if(!heap_size)return;
     
+    // harr[i] = -1e9;
+    // MinHeapify(0);
+    // extractMin();
+    
+    
     if(i >= 0 && i < heap_size) 
     {
         decreaseKey(i,-1e9);
@@ -141,18 +146,43 @@ void MinHeap::decreaseKey(int i, int new_val)
     }
 }
 
+void MinHeap::MinHeapify(int i)
+{
+	int lindex = i;
+	int left = 2*i+1;
+	int right = 2*i + 2;
+	
+	if(left < heap_size && harr[left] < harr[lindex])
+	lindex = left;
+	
+	if(right < heap_size && harr[right] < harr[lindex])
+	lindex = right;
+	
+	if(lindex!=i)
+	{
+		// swapping
+		int temp = harr[i];
+		harr[i] = harr[lindex];
+		harr[lindex] = temp; 
+		
+		i = lindex;
+		
+		MinHeapify(i);
+	}
+}
+
 /* You may call below MinHeapify function in
    above codes. Please do not delete this code
    if you are not writing your own MinHeapify */
-void MinHeap::MinHeapify(int i) 
-{
-    int l = left(i);
-    int r = right(i);
-    int smallest = i;
-    if (l < heap_size && harr[l] < harr[i]) smallest = l;
-    if (r < heap_size && harr[r] < harr[smallest]) smallest = r;
-    if (smallest != i) {
-        swap(harr[i], harr[smallest]);
-        MinHeapify(smallest);
-    }
-}
+// void MinHeap::MinHeapify(int i) 
+// {
+//     int l = left(i);
+//     int r = right(i);
+//     int smallest = i;
+//     if (l < heap_size && harr[l] < harr[i]) smallest = l;
+//     if (r < heap_size && harr[r] < harr[smallest]) smallest = r;
+//     if (smallest != i) {
+//         swap(harr[i], harr[smallest]);
+//         MinHeapify(smallest);
+//     }
+// }
