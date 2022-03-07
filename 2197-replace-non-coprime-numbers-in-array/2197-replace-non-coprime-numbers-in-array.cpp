@@ -13,18 +13,14 @@ public:
         vector<int> ans;
         
         stack <ll> st;
- 
-        
+
         for(int i = 0; i < n; i++)
         {
-            
             if(st.size() > 0 && __gcd((ll)st.top(), (ll)nums[i]) > 1ll)
             {
                 ll val = nums[i];
                 while(st.size() > 0 && __gcd((ll)st.top(), val) > 1ll)
                 {
-                   // cout << st.top() << " " << nums[i] << endl;
-                    
                     val = LCM(val, st.top());
                     st.pop();
                 }
@@ -33,10 +29,7 @@ public:
             else
             {
                 st.push(nums[i]);
-            }
-            
-          
-            
+            } 
         }
         
         while(st.size() > 0)
@@ -46,34 +39,7 @@ public:
         }
         
         reverse(ans.begin(), ans.end());
-        
-//         nums = ans;
-//         while(st.size() > 0)
-//             st.pop();
-//         st.push(nums[0]);
-        
-//         for(int i = 1; i < n; i++)
-//         {
-            
-//             if(__gcd((ll)st.top(), (ll)nums[i]) > 1)
-//             {
-//                 cout << st.top() << " " << nums[i] << endl;
-//                 int lcm = LCM(st.top(), nums[i]);
-//                 st.pop();
-//                 st.push(lcm);
-//             }
-//             else
-//             {
-//                 st.push(nums[i]);
-//             }
-//         }
-//         ans.clear();
-//         while(st.size() > 0)
-//         {
-//             ans.push_back(st.top());
-//             st.pop();
-//         }
-//        reverse(ans.begin(), ans.end());
-         return ans;
+
+        return ans;
     }
 };
