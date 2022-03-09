@@ -17,7 +17,7 @@ class Solution{
         return 0;
         
         if(i >= n || len < 0)
-        return 0;
+        return -1e9;
         
         if(dp[i][len] != -1)
         return dp[i][len];
@@ -25,10 +25,8 @@ class Solution{
         int ans1 = 0, ans2 = 0;
         // option 1
         
-        if(len >= i+1)
-        {
-            ans1 = price[i] + helper(price, n, i, len - i-1,dp);
-        }
+    
+        ans1 = price[i] + helper(price, n, i, len - i-1,dp);
         
         // option 2
         
