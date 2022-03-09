@@ -43,10 +43,32 @@ class Solution{
         {
             dp[i] = new int[n+1];
             for(int j = 0; j <= n; j++)
-            dp[i][j] = -1;
+            dp[i][j] = 0;
         }
-        int ans = helper(price, n, 0, n,dp);
-        return ans;
+        //int ans = helper(price, n, 0, n,dp);
+        
+        for(int i = 0; i <= n; i++)
+        {
+            dp[i][n] = 0;
+        }
+        
+        for(int i = 1; i <= n; i++)
+        {
+            // length
+            for(int j = 1; j <= n; j++)
+            {
+                if(j >= i)
+                {
+                    dp[i][j] = max(dp[i-1][j], price[i-1] + dp[i][j - i]);
+                }
+                else
+                {
+                    dp[i][j] = dp[i-1][j];
+                }
+            }
+        }
+        
+        return dp[n][n];
     }
 };
 
