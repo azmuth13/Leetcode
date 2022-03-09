@@ -11,41 +11,37 @@ using namespace std;
 class Solution{
   public:
     
-    int helper(int price[], int n, int i, int len,int**dp)
+    int helper(int price[], int len,int*dp)
     {
         if(len == 0)
         return 0;
         
-        if(i >= n || len < 0)
-        return -1e9;
+        if(dp[len] != -1)
+        return dp[len];
         
-        if(dp[i][len] != -1)
-        return dp[i][len];
+        int ans = 0;
+        for(int i = 1; i <= len; i++)
+        {
+            ans = max(ans, price[i-1] + helper(price,len - i,dp));
+        }
         
-        int ans1 = 0, ans2 = 0;
-        // option 1
-        
-    
-        ans1 = price[i] + helper(price, n, i, len - i-1,dp);
-        
-        // option 2
-        
-        ans2 = helper(price, n, i+1, len,dp);
-        
-        return dp[i][len] = max(ans1, ans2);
-        
+        return dp[len] = ans;
     }
   
     int cutRod(int price[], int n) {
         //code here
         int ** dp = new int*[n+1];
+        int * dp3 = new int[n+1];
+        
         for(int i = 0; i <= n; i++)
         {
+            dp3[i] = -1;
             dp[i] = new int[n+1];
             for(int j = 0; j <= n; j++)
             dp[i][j] = 0;
         }
-        //int ans = helper(price, n, 0, n,dp);
+        int ans = helper(price, n,dp3);
+        return ans;
         
         for(int i = 0; i <= n; i++)
         {
