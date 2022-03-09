@@ -52,23 +52,31 @@ class Solution{
             dp[i][n] = 0;
         }
         
+        
+        int dp2[n+1] = {};
+        
+        // length
         for(int i = 1; i <= n; i++)
         {
-            // length
-            for(int j = 1; j <= n; j++)
+            // indexes
+            for(int j = 1; j <= i; j++)
             {
-                if(j >= i)
-                {
-                    dp[i][j] = max(dp[i-1][j], price[i-1] + dp[i][j - i]);
-                }
-                else
-                {
-                    dp[i][j] = dp[i-1][j];
-                }
+                // if(j >= i)
+                // {
+                //     dp[i][j] = max(dp[i-1][j], price[i-1] + dp[i][j - i]);
+                // }
+                // else
+                // {
+                //     dp[i][j] = dp[i-1][j];
+                // }
+                
+                dp2[i] = max(dp2[i], price[j-1] + dp2[i - j]);
+                
             }
         }
         
-        return dp[n][n];
+        //return dp[n][n];
+        return dp2[n];
     }
 };
 
