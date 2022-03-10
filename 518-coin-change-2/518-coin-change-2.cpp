@@ -70,6 +70,17 @@ public:
             }
         }
         
+        // for(int i = 0; i <= amount; i++)
+        // {
+        //     for(int j = 0; j < n; j++)
+        //     {
+        //         if(i - coins[j] >= 0)
+        //         {
+        //             dp[i] += dp[i - coins[j]];
+        //         }
+        //     }
+        // }
+        
         return dp[amount];
         
         //return memo[n][amount];
