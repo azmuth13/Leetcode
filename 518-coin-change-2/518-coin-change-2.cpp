@@ -20,30 +20,56 @@ public:
     int change(int amount, vector<int>& coins) {
         int n = coins.size();
         
-        for(int i = 0; i <= n; i++)
-        {
-            for(int j = 0; j <= amount; j++)
-                memo[i][j] = -1;
-        }
-        int res = helper(coins, n, amount, 0);
-        return res;
+        // for(int i = 0; i <= n; i++)
+        // {
+        //     for(int j = 0; j <= amount; j++)
+        //         memo[i][j] = -1;
+        // }
+        // int res = helper(coins, n, amount, 0);
+        // return res;
+        
         
         int dp[5001] = {};
         
         
         dp[0] = 1;
         
-        for(int currSum = 0; currSum <= amount; currSum++)
+//         for(int i = 0; i <= n; i++)
+//         {
+//             for(int j = 0; j <= amount; j++)
+//                 memo[i][j] = 0;
+            
+//             memo[i][amount] = 1;
+//         }
+        
+        
+        
+//         for(int currSum = 0; currSum <= amount; currSum++)
+//         {
+//             for(int j = 1; j <= n; j++)
+//             {
+//                 int ans = 0;
+                
+//                 if(coins[j-1] <= currSum)
+//                 {
+//                     memo[j][currSum] = memo[j][currSum - coins[j-1]] + memo[j][currSum];
+//                 }
+//                 else
+//                 memo[j][currSum] = memo[j-1][currSum];
+
+//             }
+//         }
+        
+        for(int i = 0; i < n; i++)
         {
-            for(int j = 0; j < n; j++)
+            for(int j = coins[i]; j <= amount; j++)
             {
-                if(coins[j] <= currSum)
-                {
-                    dp[currSum] += dp[currSum - coins[j]];
-                }
+                dp[j] += dp[j - coins[i]];
             }
         }
         
         return dp[amount];
+        
+        //return memo[n][amount];
     }
 };
