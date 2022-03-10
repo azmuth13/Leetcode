@@ -38,21 +38,50 @@ class Solution{
 	int minCoins(int coins[], int M, int V) 
 	{ 
 	    // Your code goes here
-	    int ** dp = new int*[M+1];
+	   // int ** dp = new int*[M+1];
 	    
-	    for(int i = 0 ; i<=M; i++)
-	    {
-	        dp[i] = new int[V+1];
-	        for(int j = 0; j <=V; j++)
-	        dp[i][j] = -1;
-	    }
-	    int ans = helper(coins, M, V, 0,dp);
+	   // for(int i = 0 ; i<=M; i++)
+	   // {
+	   //     dp[i] = new int[V+1];
+	   //     for(int j = 0; j <=V; j++)
+	   //     dp[i][j] = -1;
+	   // }
+	   // int ans = helper(coins, M, V, 0,dp);
 	    
-	    if(ans == 1e9)
-	    ans = -1;
+	   // if(ans == 1e9)
+	   // ans = -1;
 	    
-	    return ans;
-	    
+	   // return ans;
+	   
+	   int memo[M+1][V+1] = {};
+	   
+	   for(int i = 0; i <= M; i++)
+	   {
+	       for(int j = 0; j <=V; j++)
+	       {
+	           memo[i][j] = 1e9;
+	       }
+	       
+	       memo[i][0] = 0;
+	   }
+	   
+	   for(int i = 1; i <= M; i++)
+	   {
+	       for(int j = 1; j <= V; j++)
+	       {
+	           if(j - coins[i-1] >= 0)
+	           {
+	               memo[i][j] = min(1 + memo[i][j - coins[i-1]], memo[i-1][j]) ;
+	           }
+	           else
+	           {
+	               memo[i][j] = memo[i-1][j];
+	           }
+	       }
+	   }
+	   
+	   return (memo[M][V] == 1e9)? -1 : memo[M][V];
+	   
 	} 
 	  
 };
