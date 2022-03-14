@@ -1,3 +1,5 @@
+int speedup = []{ios::sync_with_stdio(0); cin.tie(0); return 0;}();
+
 class MovieRentingSystem {
 public:
     
@@ -11,7 +13,7 @@ public:
     unordered_map <int, set < pair <int, int> > > movies;
     
     MovieRentingSystem(int n, vector<vector<int>>& entries) {
-        ios_base::sync_with_stdio(0);
+        
         
         for(int i = 0; i < entries.size(); i++)
         {
