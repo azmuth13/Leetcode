@@ -1,93 +1,84 @@
 class Solution {
 public:
-    
-    vector <int> maxVector(vector <int> nums, int l)
-    {
-        while(nums.size() > l)
-        {
-            int i = 0, n = nums.size();
-            
-            for(; i < n-1; i++)
-            {
-                if(nums[i] < nums[i+1])
-                {
-                    nums.erase(nums.begin() + i);
-                    break;
+    vector<int> getAns(int x, vector<int>&v) {
+      if(x == v.size())return {};
+      if(x == 0)return v;
+      vector<int>ans;
+      for (auto p : v) {
+            if (x == 0 || ans.empty()) {
+                  ans.push_back(p);
+                  continue;
+            }
+            while (x > 0 && !ans.empty() && ans.back() < p) {
+                  ans.pop_back();
+                  x--;
+            }
+            ans.push_back(p);
+      }
+      while (x--)ans.pop_back();
+      return ans;
+    }
+    vector<int> merge(vector<int> a, vector<int> b) {
+        int i = 0, j = 0, k = 0;
+        int n = a.size(), m = b.size();
+        vector<int>ans(n + m); 
+        while(i < n && j < m) {
+            if(a[i] > b[j]) {
+                ans[k++] = a[i++];
+            }
+            else if(a[i] < b[j]) {
+                ans[k++] = b[j++];
+            }
+            else {
+                if(i + 1 < n && j + 1 < m) {
+                    if(a[i + 1] > b[j + 1]) {
+                        ans[k++] = a[i++];
+                    }
+                    else if(a[i + 1] < b[j + 1]){
+                        ans[k++] = b[j++];
+                    }
+                    else {
+                        int x = i + 1, y = j + 1;
+                        while(x < n && y < m && a[x] == b[y])x++,y++;
+                        if(x >= n) {
+                            ans[k++] = b[j++];
+                        }
+                        else if(y >= m) {
+                            ans[k++] = a[i++];
+                        }
+                        else {
+                            if(a[x] > b[y]) {
+                                ans[k++] = a[i++];
+                            }
+                            else {
+                                ans[k++] = b[j++];
+                            }
+                        }
+                    }
+                   
+                }
+                else {
+                    if(j + 1 >= m)
+                        ans[k++] = a[i++];
+                    else {
+                        ans[k++] = b[j++];
+                    }
                 }
             }
-            
-            if(i == n-1)
-            {
-                nums.erase(nums.begin() + i);
-            }
         }
-        return nums;
-    }
-    
-    bool compare(vector <int> &nums1, int i, vector <int> &nums2, int j)
-    {
-        while(i < nums1.size() && j < nums2.size() && nums1[i] == nums2[j])
-        {
-            i++, j++;
-        }
-        
-        if(i < nums1.size() && j < nums2.size())
-        {
-            return nums1[i] > nums2[j]; 
-        }
-        else if(j == nums2.size())
-            return true;
-        else
-            return false;
-    }
-    
-    vector <int> merge(vector <int> &nums1, vector <int> &nums2, int k)
-    {
-        vector <int> ans(k,0);
-        
-        int i = 0, j = 0, r = 0;
-        
-        while(r < k)
-        {
-            if(compare(nums1, i, nums2, j))
-            {
-                ans[r++] = nums1[i++];
-            }
-            else
-            {
-                ans[r++] = nums2[j++];
-            }
-        }
+        while(i < n)ans[k++] = a[i++];
+        while(j < m)ans[k++] = b[j++];
         return ans;
     }
-    
-    vector<int> maxNumber(vector<int>& nums1, vector<int>& nums2, int k) {
-        
-        int m = nums1.size();
-        int n = nums2.size();
-        
-        vector <int> ans(k,0);
-        
-        for (int l1 = max(0, k-n); l1 <= min(k, m); ++l1)
-        {
-//             int l1 = i;
-//             int l2 = k - i;
+    vector<int> maxNumber(vector<int>& A, vector<int>& B, int k) {
+        vector<int>ans(k, -1);
+        int n = A.size(), m = B.size();
+        for(int i=0;i<=min(n, k);i++) {
+            int rem = k - i;
+            if(rem <= m)
+                ans = max(ans, merge(getAns(n - i, A), getAns(m - rem, B)));
             
-//             if(l1 >= k || l1< 0 || l2 >= k || l2 < 0)
-//             {
-//                 continue;
-//             }
-            
-            auto v1 = maxVector(nums1, l1);
-            auto v2 = maxVector(nums2, k-l1);
-            auto v3 = merge(v1, v2, k);
-            
-            if(compare(v3,0,ans,0))
-            {
-                ans = v3;
-            }
         }
-        
         return ans;
     }
 };
