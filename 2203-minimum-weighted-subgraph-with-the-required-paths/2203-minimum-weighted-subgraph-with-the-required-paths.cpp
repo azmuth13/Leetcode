@@ -1,4 +1,3 @@
-int speedup = []{ios::sync_with_stdio(0); cin.tie(0); return 0;}();
 class Solution {
 public:
     using ll = long long;
@@ -17,7 +16,7 @@ public:
             ll curr = pp.second;
             ll currCost = pp.first;
             
-            if(currCost != d[curr])
+            if(currCost > d[curr])
                 continue;
             
             for(auto x : adj[curr])
@@ -50,10 +49,7 @@ public:
         dijkstra(src1, ds1, front);
         dijkstra(src2, ds2, front);
         dijkstra(dest, dd, back);
-        
-//         if(dd[src1] == 1e15 || dd[src2] == 1e15)
-//             return -1;
-        
+                
         ll ans = 1e15;
         
         for(int i = 0; i < n; i++)
