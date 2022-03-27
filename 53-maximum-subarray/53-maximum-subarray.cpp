@@ -11,7 +11,8 @@ public:
         {
             sum += nums[i];
             
-            ans = max(ans, sum);
+            if(sum > ans)
+                ans = sum;
             
             if(sum < 0)
                 sum = 0;
