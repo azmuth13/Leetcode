@@ -27,7 +27,7 @@ public:
 
         int ans = 1;
         
-        vector < vector <int> > dp(2001, vector <int> (2001, 0));
+        vector < vector <int> > dp(1501, vector <int> (1501, 0));
         
         for(int d = -500; d <= 500; d++)
         {
