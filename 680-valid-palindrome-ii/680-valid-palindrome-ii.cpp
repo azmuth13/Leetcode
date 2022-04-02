@@ -1,41 +1,49 @@
 class Solution {
 public:
-
     bool validPalindrome(string s) {
         
-        int i = 0, j = s.length()-1;
-    
-        while(i < j)
+        int n = s.size();
+        
+        int bad = 0;
+        
+        int start = 0, end = n-1;
+        
+        while(start < end)
         {
-            if(s[i] == s[j])
+            if(s[start] != s[end])
             {
-                i++, j--;
-            }
-            else
-            {
-                int i1 = i, j1 = j-1;
-                int i2 = i+1, j2 = j;
+                int a = start+1, b = end;
                 
-                while(i1 < j1)
+                int c = start, d = end-1;
+                
+                int count = 0;
+                while(a < b)
                 {
-                    if(s[i1] != s[j1])
+                    if(s[a++] != s[b--])
+                    {
+                        count++;
                         break;
-                    
-                    i1++, j1--;
+                    }
                 }
                 
-                while(i2 < j2)
+                while(c < d)
                 {
-                    if(s[i2] != s[j2])
+                    if(s[c++] != s[d--])
+                    {
+                        count++;
                         break;
-                    
-                    i2++, j2--;
+                    }
                 }
                 
-                return ((i1 >= j1) || (i2 >= j2));
+                if(count >= 2)
+                    return false;
+                
+                return true;
             }
+            
+            start++, end--;
         }
-    
+        
         return true;
     }
 };
