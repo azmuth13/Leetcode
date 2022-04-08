@@ -15,12 +15,9 @@ public:
     int add(int val){
 
         pq.push(val);
-        
         if(pq.size()  > kk)
         pq.pop();
-
         return pq.top();
-
     }
 };
 
