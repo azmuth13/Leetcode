@@ -31,6 +31,26 @@ public:
         reverse(ans.begin(), ans.end());
     }
     
+    bool check(int src, vector <int> adj[], vector<int> &vis)
+    {
+        vis[src] = 1;
+        bool res = false;
+        for(auto x : adj[src])
+        {
+            if(vis[x] == 1)
+            {
+                return true;
+            }
+            else if(vis[x] == 0)
+            {
+                res = res | check(x, adj, vis);
+            }
+        }
+        
+        vis[src] = 2;
+        return res;
+    }
+    
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         
         int e = prerequisites.size();
@@ -44,25 +64,15 @@ public:
             adj[u].push_back(v);
         }
         
-        topologicalSort(adj, numCourses, e);
-        
-        map <int, int> mp;
-        
-        for(int i = 0; i<ans.size(); i++)
+        vector <int> vis(numCourses,0);
+        for(int cr = 0; cr < numCourses; cr++)
         {
-            mp[ans[i]] = i;
-            //cout<<ans[i]<<" ";
-        }
-        //cout<<endl;
-        
-        
-        for(int i=0; i<e; i++)
-        {
-            int u = prerequisites[i][1];
-            int v = prerequisites[i][0];
-            
-            if(mp[u] > mp[v] || u == v)
-                return false;
+            if(!vis[cr])
+            {
+                bool cycle = check(cr, adj, vis);
+                if(cycle)
+                    return false;
+            }
         }
         
         return true;
