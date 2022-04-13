@@ -31,8 +31,8 @@ public:
             int wt = ptop.first;
             int u = ptop.second;
             
-            if(distance[u] != wt)
-                continue;
+            // if(distance[u] != wt)
+            //     continue;
             
             for(auto it : adj[u])
             {
