@@ -23,7 +23,7 @@ public:
         while(!q.empty())
         {
             int sz = q.size();
-            set <int> L, R, N;
+            set <int> L, R;
             while(sz--)
             {
                 auto pp = q.front();
@@ -36,7 +36,6 @@ public:
                         if(L.find(i+1) != L.end())
                         {
                             L.erase(i+1);
-                            N.insert(i+1);
                         }
                         else
                         {
@@ -54,7 +53,6 @@ public:
                         if(R.find(i-1) != R.end())
                         {
                             R.erase(i-1);
-                            N.insert(i-1);
                         }
                         else
                         {
@@ -70,7 +68,6 @@ public:
             for(auto x : R)
             dominoes[x] = 'R';
         }
-        
         
         return dominoes;
     }
