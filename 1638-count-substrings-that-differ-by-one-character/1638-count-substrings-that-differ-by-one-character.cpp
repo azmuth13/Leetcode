@@ -1,10 +1,8 @@
 class Solution {
 public:
     unordered_map <string, int> store;
-    
     int check(string &curr)
     {
-        //cout << curr << endl;
         int len = curr.size();
         int ans = 0;
         
@@ -21,6 +19,7 @@ public:
                 {
                     ans += store[curr];
                 } 
+                
             }
             curr[i] = temp;
         }
