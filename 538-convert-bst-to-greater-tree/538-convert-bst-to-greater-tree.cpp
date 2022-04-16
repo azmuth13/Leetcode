@@ -12,7 +12,7 @@
 class Solution {
 public:
     
-    void helper(TreeNode* root, int &parentSum)
+    void helper(TreeNode* &root, int &parentSum)
     {
         if(!root)
             return;
@@ -21,7 +21,6 @@ public:
         root->val += parentSum;
         parentSum = root->val;
         helper(root->left, parentSum);
-        
     }
     
     TreeNode* convertBST(TreeNode* root) {
