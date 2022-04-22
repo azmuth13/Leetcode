@@ -58,14 +58,14 @@ public:
         priority_queue < pair <int, int>, vector < pair <int, int> >, greater <pair <int, int> > > pq;
 
         pq.push({0, 0});
-        
-        //for(int count = 0; count < n-1; count++)
+
         while(!pq.empty())
         {
             int u = pq.top().second;
-            
-            
             pq.pop();
+            
+            if(mstSet[u])
+                continue;
             
             mstSet[u] = true;
 
