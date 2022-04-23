@@ -67,21 +67,11 @@ public:
                 }
                 else
                 {
-                    // pred->right = NULL;
-                    // cout << curr->val << " ";
-                    // curr = curr->right;
-                    
                     TreeNode* temp = curr->right;
                     curr->right = curr->left;
                     curr->left = NULL;
                     pred->right = temp;
-                    curr = temp;
-                    
-//                     tn* tmp=cur->right;
-//                     cur->right=cur->left;
-//                     cur->left = nullptr;
-//                     rMost->right=tmp;
-//                     cur = tmp;
+                    //curr = temp;
                 }
             }
             else
