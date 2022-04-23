@@ -12,40 +12,83 @@
 class Solution {
 public:
     
-    void helper(TreeNode *&root)
+    void print(TreeNode* root)
     {
-        if(!root)
-            return;
+        // leftST , Root, RightST
         
-        
-        
-        helper(root->left);
-        helper(root->right);
-        
+        TreeNode* curr = root;
+         
+        while(curr != NULL)
+        {
+            if(curr->left)
+            {
+                TreeNode* pred = curr->left;
+                
+                while(pred->right && pred->right != curr)
+                    pred = pred->right;
+                
+                if(pred->right == NULL)
+                {
+                    pred->right = curr;
+                    curr = curr->left;
+                }
+                else
+                {
+                    pred->right = NULL;
+                    cout << curr->val << " ";
+                    curr = curr->right;
+                }    
+            }
+            else
+            {
+                cout << curr->val << " ";
+                curr = curr->right;
+            }
+        }
     }
     
     void flatten(TreeNode* root) {
         
-        if(!root)
-            return;
-        if(!root->left && !root->right)
-            return;
+        TreeNode* curr = root;
         
-        
-        flatten(root->left);
-        
-        TreeNode* r = root->right;
-        
-        root->right = root->left;
-        
-        root->left = NULL;
-        
-        while(root->right)
-            root = root->right;
-        
-        root->right = r;
-        
-        flatten(root->right);
-        
+        while(curr != NULL)
+        {
+            if(curr->left)
+            {
+                TreeNode* pred = curr->left;
+                
+                while(pred->right && pred->right != curr)
+                    pred = pred->right;
+                
+                if(pred->right == NULL)
+                {
+                    pred->right = curr;
+                    curr = curr->left;
+                }
+                else
+                {
+                    // pred->right = NULL;
+                    // cout << curr->val << " ";
+                    // curr = curr->right;
+                    
+                    TreeNode* temp = curr->right;
+                    curr->right = curr->left;
+                    curr->left = NULL;
+                    pred->right = temp;
+                    curr = temp;
+                    
+//                     tn* tmp=cur->right;
+//                     cur->right=cur->left;
+//                     cur->left = nullptr;
+//                     rMost->right=tmp;
+//                     cur = tmp;
+                }
+            }
+            else
+            {
+                //cout << curr->val << " ";
+                curr = curr->right;
+            }
+        }
     }
 };
