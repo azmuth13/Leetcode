@@ -18,9 +18,10 @@
  */
 
 class PeekingIterator : public Iterator {
+    int nextVal;
 public:
     
-    int nextVal;
+    
     
 	PeekingIterator(const vector<int>& nums) : Iterator(nums) {
 	    // Initialize any member here.
