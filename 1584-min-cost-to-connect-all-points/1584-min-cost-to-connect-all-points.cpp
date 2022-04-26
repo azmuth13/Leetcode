@@ -1,5 +1,8 @@
 class Solution {
 public:
+    
+    // solve using kruskal
+    
     int minCostConnectPoints(vector<vector<int>>& points) {
         
         int n = points.size();
@@ -92,7 +95,7 @@ public:
             int wt = abs(points[i][0] - points[j][0]) + 
                     abs(points[i][1] - points[j][1]);
             
-            ans += wt;
+            ans += key[i];
             
             //cout << i << " " << j << endl; 
         }
