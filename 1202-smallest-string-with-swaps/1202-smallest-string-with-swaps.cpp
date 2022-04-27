@@ -7,7 +7,7 @@ public:
         
         help.push_back(src);
         
-        for(auto j : adj[src])
+        for(auto &j : adj[src])
         {
             if(!vis[j])
             {
@@ -22,7 +22,7 @@ public:
         int sz = s.size();
         
         vector < vector <int> > adj(sz+1);
-        for(auto x : pairs)
+        for(auto &x : pairs)
         {
             int i = x[0];
             int j = x[1];
@@ -45,7 +45,7 @@ public:
                 
                 string res = "";
                 
-                for(auto y : help)
+                for(auto &y : help)
                 {
                     //cout << y << " ";
                     res += s[y];
@@ -54,7 +54,7 @@ public:
                 sort(res.begin(), res.end());
                 sort(help.begin(), help.end());
                 int v = 0;
-                for(auto y : help)
+                for(auto &y : help)
                 {
                     ans[y] = res[v++];
                 }
