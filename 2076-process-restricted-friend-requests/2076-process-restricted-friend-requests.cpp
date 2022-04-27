@@ -24,7 +24,7 @@ struct DSU{
         {
             return a;
         }
-        //parent[a] = find_set(parent[a]);
+        parent[a] = find_set(parent[a]);
 
         return find_set(parent[a]);
     }
