@@ -6,8 +6,6 @@ public:
         
         int n = s.size();
         
-        int i = 0;
-        
         stack <pair <char, int> > st;
         
         for(int i = 0; i < n; i++)
@@ -20,12 +18,12 @@ public:
             {
                 if(s[i] == st.top().first)
                 {
-                    auto pp = st.top();
-                    st.pop();
-                    pp.second += 1;
+                    // auto pp = st.top();
+                    // st.pop();
+                    st.top().second += 1;
                     
-                    if(pp.second != k)
-                    st.push(pp);
+                    if(st.top().second == k)
+                    st.pop();
                 }
                 else
                 {
@@ -34,12 +32,12 @@ public:
             }
         }
         
-        while(st.size() > 0)
+        while((int)st.size())
         {
-            auto pp = st.top();
+            ans += string(st.top().second, st.top().first);
             st.pop();
-            ans += string(pp.second, pp.first);
         }
+        
         reverse(ans.begin(), ans.end());
         return ans;
     }
