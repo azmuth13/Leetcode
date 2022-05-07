@@ -30,7 +30,6 @@ public:
                     mp[s[l]]--;
                     if(mp[s[l]] == 0)
                     {
-                        mp.erase(s[l]);
                         cnt--;
                     }
                     
@@ -44,7 +43,6 @@ public:
                 
                 if(freq == uniq)
                 {
-                    //cout << "Yes\n";
                     ans = max(ans, r-l+1);
                 }
                 r++;
