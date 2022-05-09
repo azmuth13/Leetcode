@@ -8,7 +8,7 @@ public:
         ll ans = 0;
         
         ll hash = 0;
-        map <ll, ll> mp;
+        unordered_map <ll, ll> mp;
         mp[0] = 1;
         for(int i = 0; i < n; i++)
         {
@@ -16,7 +16,7 @@ public:
             
             ans += mp[hash];
             
-            for(int k = 0; k <= 10; k++)
+            for(int k = 0; k < 10; k++)
             {
                 ll nhash = hash ^ (1ll<<(k));
                 ans += mp[nhash];
