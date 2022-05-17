@@ -9,8 +9,9 @@ class minheap{
         
     }
     
-    void minHeapify(int a[], int n, int i)
+    void minHeapifyTOP(int a[], int n, int i)
     {
+        // top -> to be used in pop
         int lindex = i;
         int left = 2*i+1;
         int right = 2*i + 2;
@@ -28,13 +29,25 @@ class minheap{
             a[i] = a[lindex];
             a[lindex] = temp; 
             
-            minHeapify(a,n,lindex);
+            minHeapifyTOP(a,n,lindex);
         }
     }
     
-    void buildHeap()
+    void minHeapifyBOTTOM(int a[], int n, int i)
     {
+       int parent = (i-1)/2;
         
+        while(i != 0 && a[parent] > a[i])
+        {
+            swap(a[parent], a[i]);
+            i = parent;
+            parent = (i-1)/2;
+        }
+    }
+    
+    void buildHeap(int i)
+    {
+ 
     }
     
     //---------------------//
@@ -46,15 +59,8 @@ class minheap{
         int i = n;
         
         n++;
-        
-        int parent = (i-1)/2;
-        
-        while(i != 0 && a[parent] > a[i])
-        {
-            swap(a[parent], a[i]);
-            i = parent;
-            parent = (i-1)/2;
-        }
+
+        minHeapifyBOTTOM(a, n, i);
     }
     
     int pop()
@@ -70,7 +76,7 @@ class minheap{
         
         n-=1;
         
-        minHeapify(a, n, 0);
+        minHeapifyTOP(a, n, 0);
         return x;
     }
     
