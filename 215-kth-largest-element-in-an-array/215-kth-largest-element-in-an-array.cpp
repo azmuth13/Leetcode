@@ -99,17 +99,17 @@ public:
 //          min heap
         //priority_queue <int, vector <int> , greater <int> > pq;
         
-        minheap pq;
+         pair <minheap, minheap> pq;
         
         for(int i = 0; i < nums.size(); i++)
         {
-            pq.push(nums[i]);
+            pq.first.push(nums[i]);
             
-            if(pq.size() > k)
-                pq.pop();
+            if(pq.first.size() > k)
+                pq.first.pop();
         }
         
-        return pq.top();
+        return pq.first.top();
         
     }
 };
