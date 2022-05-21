@@ -19,23 +19,39 @@ public:
 //         }
 //         return ans;
         
-        vector <int> cnt(32,0);
+//         vector <int> cnt(32,0);
         
-        for(int i = 0; i < n; i++)
+//         for(int i = 0; i < n; i++)
+//         {
+//             for(int j = 0; j < 32; j++)
+//             {
+//                 if((1<<j)&nums[i])
+//                     cnt[j]++;
+//             }
+//         }
+//         int ans = 0;
+//         for(int i = 0; i < 32; i++)
+//         {
+//             if(cnt[i] > n/2)
+//                 ans |= (1<<i);
+//         }
+//         return ans;
+        
+        int candidate = nums[0];
+        int count = 1;
+        for(int i = 1; i < n; i++)
         {
-            for(int j = 0; j < 32; j++)
+            if(count==0)
             {
-                if((1<<j)&nums[i])
-                    cnt[j]++;
+                count = 1;
+                candidate = nums[i];
             }
+            else if(nums[i] == candidate)
+                count++;
+            else
+                count--;
         }
-        int ans = 0;
-        for(int i = 0; i < 32; i++)
-        {
-            if(cnt[i] > n/2)
-                ans |= (1<<i);
-        }
-        return ans;
+        return candidate;
     }
 };
 
