@@ -22,7 +22,7 @@ public:
     }
     
     /** Inserts a word into the trie. */
-    void insert(string word) {
+    void insert(string &word) {
         node* temp = root;
 
         for(char c : word)
@@ -52,7 +52,7 @@ public:
     }
     
     /** Returns if there is any word in the trie that starts with the given prefix. */
-    bool startsWith(string prefix) {
+    bool startsWith(string &prefix) {
         node* temp = root;
         for(auto c : prefix)
         {
@@ -64,7 +64,7 @@ public:
         return true;
     }
     
-    void find(string num, int &ans)
+    void find(string &num, int &ans)
     {
         node* temp = root;
         for(int i = 0; i < 32; i++)
@@ -132,7 +132,6 @@ public:
             int res = 0;
             trie.find(bin,res);
             ans = max(ans, res);
-            // cout << bin << endl;
         }
         return ans;
     }
