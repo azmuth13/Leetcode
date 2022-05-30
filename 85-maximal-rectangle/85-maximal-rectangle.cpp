@@ -120,6 +120,7 @@ public:
         {
             vector <int> v = mat[i];
             int res = histogram(v);
+            //cout << res << endl;
             ans = max(ans, res);
         }
         return ans;
