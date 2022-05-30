@@ -5,7 +5,7 @@ public:
     {
         // need to find the rightmost index where v[n].startTime >= v[i].endTime
         
-        int l = 0, r = v.size()-1;
+        int l = 0, r = n;
         int ans = -1;
         while(l <= r)
         {
