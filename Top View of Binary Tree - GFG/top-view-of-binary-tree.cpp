@@ -102,76 +102,72 @@ struct Node
 class Solution
 {
     public:
+    
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
     
-    void helper(Node* root, int position, int height, vector <vector <int> > &res)
-    {
-        // time complexity : O(n)
-        if(!root)
-            return;
-    
-        res.push_back({position, height, root->data});
-    
-        helper(root->left, position-1, height+1, res);
-        helper(root->right, position+1, height+1, res);
-        
-    }
-
-    
-    // map <int, int> mp;
-    
-    // void helper(Node* root, int level)
+    // void helper(Node* root, int position, int height, vector <vector <int> > &res)
     // {
+    //     // time complexity : O(n)
     //     if(!root)
-    //     return;
+    //         return;
+
+    //     res.push_back({position, height, root->data});
         
-       
-    //     helper(root->right, level+1);
-    //     if(mp.find(level) == mp.end())
-    //     {
-    //         mp[level] = root->data;
+    //     helper(root->left, position-1, height+1, res);
+    //     helper(root->right, position+1, height+1, res);
+        
+    // }
+
+    // vector<int> topView(Node *root)
+    // {
+
+    //     vector < vector <int> > res;
+    //     helper(root, 0, 0, res);
+        
+    //     sort(res.begin(), res.end());
+        
+    //     vector <pair <int, int> > ans;
+        
+    //     for(auto &x : res)
+    //     {   
+    //         if(ans.size() == 0)
+    //         {
+    //             ans.push_back({x[2],x[0]});
+    //         }
+    //         else if(ans.back().second != x[0])
+    //         {
+    //             ans.push_back({x[2],x[0]});
+    //         }
     //     }
         
-        
-    //      helper(root->left, level-1);
+    //     vector <int> res1;
+    //     for(auto &x : ans)
+    //     res1.push_back(x.first);
+    //     return res1;
     // }
     
+    map<int, pair<int, int>> view;
+    void getAns(Node* root, int pos, int h) {
+        if(!root) return;
+        
+        getAns(root -> left, pos - 1, h + 1);
+        getAns(root -> right, pos + 1, h + 1);
+        
+        if(!view.count(pos) || (view.count(pos) && view[pos].second > h))
+            view[pos] = {root -> data, h};
+    }
     vector<int> topView(Node *root)
     {
         //Your code here
-        // mp.clear();
-        // vector <int> ans;
-        
-        // helper(root,0);
-        
-        // for(auto x : mp)
-        // {
-        //     ans.push_back(x.second);
-        // }
-        
-        vector < vector <int> > res;
-        helper(root, 0, 0, res);
-        
-        sort(res.begin(), res.end());
-        
-        vector <pair <int, int> > ans;
-        
-        for(auto &x : res)
-        {   
-            if(ans.size() == 0)
-            ans.push_back({x[2],x[0]});
-            else
-            if(ans.back().second != x[0])
-            {
-                ans.push_back({x[2],x[0]});
-            }
+        view.clear();
+        getAns(root, 0, 0);
+        vector<int> ans(view.size());
+        int i = 0;
+        for(auto p : view) {
+            ans[i++] = p.second.first;
         }
-        
-        vector <int> res1;
-        for(auto &x : ans)
-        res1.push_back(x.first);
-        return res1;
+        return ans;
     }
 };
 
