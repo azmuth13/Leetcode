@@ -15,7 +15,7 @@ class Solution {
 public:
     
     int ans;
-    map <int, int> mp;
+    unordered_map <int, int> mp;
     
     int helper(TreeNode* root)
     {
