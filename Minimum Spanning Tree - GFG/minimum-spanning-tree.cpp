@@ -5,6 +5,53 @@ using namespace std;
  // } Driver Code Ends
 
 
+class DSU{
+    int n;
+    vector <int> parent;
+    vector <int> size;
+    public:
+
+    DSU(int _n)
+    {
+        n = _n;
+        parent.resize(n);
+        size.resize(n);
+        for(int i = 0; i < n; i++)
+            parent[i] = i, size[i] = 1;
+    }
+
+    int getParent(int u)
+    {
+        int par = parent[u];
+        if(par == u)
+            return u;
+
+        return parent[u] = getParent(par);
+    }
+
+    bool merge(int u, int v)
+    {
+        int pv = getParent(v);
+        int pu = getParent(u);
+
+        if(pv == pu)
+        {
+            // merge nahi hua
+            return false;
+        }
+
+        if(size[pu] > size[pv])
+            swap(pu,pv);
+
+        size[pv] += size[pu];
+        parent[pu] = pv;
+
+        // merge ho gaya
+        return true;
+    }
+};
+
+
 class Solution
 {
 	public:
@@ -12,20 +59,79 @@ class Solution
     int spanningTree(int V, vector<vector<int>> adj[])
     {
         // code here
-            int N = V;
             
-            int parent[N];
-            int key[N];
+        int sum = 0;
         
-            bool mstSet[N];
+        vector < vector <int> > ed;
         
-            for(int i = 0; i < N; i++)
+        for(int i = 0; i < V; i++)
+        {
+           // cout << i << endl;
+            for(auto &x : adj[i])
             {
-                key[i] = INT_MAX, mstSet[i] = false, parent[i] = -1;
+                // for(auto &y : x)
+                // {
+                //     cout << y << " ";
+                // }
+                // cout << endl;
+                ed.push_back({x[1],i,x[0]});
             }
+            
+            //cout << endl;
+        }
+        sort(ed.begin(), ed.end());
+        // for(auto x : ed)
+        // {
+        //     for(auto y : x)
+        //     {
+        //         cout << y << " ";
+        //     }
+        //     cout << endl;
+        // }
         
-            key[0] = 0;
-            parent[0] = -1;
+        
+        DSU dsu(V);
+        int cnt = 0;
+        for(int i = 0; i < ed.size(); i++)
+        {
+            if(cnt == V-1)
+            break;
+            int wt = ed[i][0];
+            int a = ed[i][1];
+            int b = ed[i][2];
+            
+            a = dsu.getParent(a);
+            b = dsu.getParent(b);
+            
+            if(a != b)
+            {
+                dsu.merge(a,b);
+                //cout << a << " " << b << endl;
+                sum += wt;
+                cnt++;
+            }
+        }
+        
+        return sum;
+    }
+
+};
+
+
+// int N = V;
+            
+            // int parent[N];
+            // int key[N];
+        
+            // bool mstSet[N];
+        
+            // for(int i = 0; i < N; i++)
+            // {
+            //     key[i] = INT_MAX, mstSet[i] = false, parent[i] = -1;
+            // }
+        
+            // key[0] = 0;
+            // parent[0] = -1;
         
             /*
             brute appraoch
@@ -66,43 +172,45 @@ class Solution
         
             */
         
-            // efficient appraoch
+            // efficient appraoch (prims)
         
-            priority_queue < pair <int, int>, vector < pair <int, int> >, greater <pair <int, int> > > pq;
+            // priority_queue < pair <int, int>, vector < pair <int, int> >,
+            // greater <pair <int, int> > > pq;
         
-            pq.push({0, 0});
+            // pq.push({0, 0});
         
-            while(!pq.empty())
-            {
-                int u = pq.top().second;
-                pq.pop();
+            // while(!pq.empty())
+            // {
+            //     int u = pq.top().second;
+            //     pq.pop();
                 
-                mstSet[u] = true;
-                for(auto it : adj[u])
-                {
-                    int v = it[0];
-                    int wt = it[1];
+            //     mstSet[u] = true;
+            //     for(auto it : adj[u])
+            //     {
+            //         int v = it[0];
+            //         int wt = it[1];
         
-                    if(mstSet[v] == false && wt < key[v])
-                    {
-                        parent[v] = u;
-                        key[v] = wt;
-                        pq.push({key[v], v});
-                    }
-                }
-            }
+            //         if(mstSet[v] == false && wt < key[v])
+            //         {
+            //             parent[v] = u;
+            //             key[v] = wt;
+            //             pq.push({key[v], v});
+            //         }
+            //     }
+            // }
             
-            int sum = 0;
+            // int sum = 0;
             
-            for(int i = 0; i < N; i++)
-            {
-                // cout << parent[i] << " - " << i << endl;
-                sum += key[i];
-            }
+            // for(int i = 0; i < N; i++)
+            // {
+            //     // cout << parent[i] << " - " << i << endl;
+            //     sum += key[i];
+            // }
             
-            return sum;
-    }
-};
+            // return sum;
+
+
+
 
 // { Driver Code Starts.
 
