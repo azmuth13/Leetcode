@@ -8,7 +8,7 @@ public:
         
         for(int i = 31; i >= 0; i--)
         {
-            if( ((1 << i)&left) != ((1 << i)&right) )
+            if( (((1 << i)&left )== 0) && (((1 << i)&right) != 0) )
                 break;
             
             if((1 << i)&left)
