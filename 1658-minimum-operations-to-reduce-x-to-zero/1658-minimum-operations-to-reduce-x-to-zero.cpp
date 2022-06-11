@@ -3,10 +3,6 @@ public:
     int minOperations(vector<int>& nums, int x) {
         
         int n = nums.size();
-        
-        // max length subarray with sum = target
-        // target = totalSum - x; 
-        
         int sum = 0;
         
         for(int i = 0; i < n; i++)
@@ -22,29 +18,34 @@ public:
         if(target == 0)
             return n;
         
-        unordered_map <int, int> mp;
-        mp[0] = -1;
-        int pre = 0;
         int len = 0;
         
-        for(int i = 0; i < n; i++)
+        int l = 0, r = 0;
+        int p = 0;
+        while(r < n)
         {
-            pre += nums[i];
-           
-            
-            if(mp.find(pre-target) != mp.end())
+            if(p + nums[r] < target)
             {
-                //cout << pre << endl;
-                len = max(len, i - mp[pre-target]);
+                p += nums[r];
+                r++;
             }
-            mp[pre] = i;
+            else if(p + nums[r] > target)
+            {
+                p -= nums[l];
+                l++;
+            }
+            else if(p + nums[r] == target)
+            {
+                //cout << r << endl;
+                len = max(len, r-l+1);
+                p += nums[r];
+                r++;
+            }
         }
         
         //cout << len << endl;
-        int res = n-len;
-        if(res < 0 || len == 0)
-            res = -1;
+        if(len == 0) return -1;
         
-        return res;
+        return n-len;
     }
 };
