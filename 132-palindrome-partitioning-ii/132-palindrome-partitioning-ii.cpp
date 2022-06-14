@@ -3,8 +3,10 @@ public:
     
     bool isPal(string &s, int i, int j)
     {
+        
         while(i < j)
         {
+            
             if(s[i] != s[j])
             {
                 return false;
@@ -14,6 +16,7 @@ public:
         }
         return true;
     }
+    
     
     int helper(string &s, int i, int *memo)
     {
@@ -44,6 +47,17 @@ public:
     
     int minCut(string s) {
         int n = s.size();
+        
+        
+        // bool ** storePal = new bool*[n+1];
+        // for(int i=0; i <= n; i++)
+        // {
+        //     storePal[i] = new bool[n+1];
+        //     for(int j = 0; j <= n; j++)
+        //     {
+        //         storePal[i][j] = 0;
+        //     }
+        // }
         
         if(isPal(s,0,n-1))
             return 0;
