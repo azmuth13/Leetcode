@@ -38,12 +38,18 @@ public:
         
         if(root->val == head->val)
         {
-            ans |= (helper(head->next, root->left) || helper(head->next, root->right));
+            ans |= helper(head->next, root->left);
+            if(ans) return true;
+            ans |= helper(head->next, root->right);
+            if(ans) return true;
         }
         
-        ans |= (helper(store, root->left) || helper(store, root->right));
-        return mp[{head,root}] = ans;
+        ans |= helper(store, root->left);
+        if(ans) return true;
+        ans |= helper(store, root->right);
+        if(ans) return true;
         
+        return mp[{head,root}] = ans;
     }
     
     bool isSubPath(ListNode* head, TreeNode* root) {
