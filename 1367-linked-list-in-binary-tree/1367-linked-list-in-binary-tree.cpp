@@ -21,39 +21,55 @@
  */
 class Solution {
 public:
-    ListNode* store;
-    map < pair <ListNode*, TreeNode* >, bool > mp;
-    bool helper(ListNode* head, TreeNode* root)
-    {
-        if(head == NULL)
-            return true;
+//     ListNode* store;
+//     map < pair <ListNode*, TreeNode* >, bool > mp;
+//     bool helper(ListNode* head, TreeNode* root)
+//     {
         
-        if(!root)
-            return false;
+//         if(head == NULL)
+//             return true;
         
-        if(mp.find({head,root}) != mp.end())
-             return mp[{head,root}];
+//         if(!root)
+//             return false;
         
-        bool ans = false;
+//         // if(mp.find({head,root}) != mp.end())
+//         //      return mp[{head,root}];
         
-        if(root->val == head->val)
-        {
-            ans |= helper(head->next, root->left);
-            if(ans) return true;
-            ans |= helper(head->next, root->right);
-            if(ans) return true;
-        }
+//         bool ans = false;
         
-        ans |= helper(store, root->left);
-        if(ans) return true;
-        ans |= helper(store, root->right);
-        if(ans) return true;
-        //return ans;
-        return mp[{head,root}] = ans;
-    }
+//         if(root->val == head->val)
+//         {
+//             ans |= helper(head->next, root->left);
+//             if(ans) return true;
+//             ans |= helper(head->next, root->right);
+//             if(ans) return true;
+//         }
+        
+//         ans |= helper(store, root->left);
+//         if(ans) return true;
+//         ans |= helper(store, root->right);
+//         if(ans) return true;
+        
+//         cout << &head << ' ' << &root << endl;
+//         return ans;
+        
+//         //return mp[{head,root}] = ans;
+//     }
     
-    bool isSubPath(ListNode* head, TreeNode* root) {
-        store = head;
-        return helper(head,root);
+//     bool isSubPath(ListNode* head, TreeNode* root) {
+//         store = head;
+//         return helper(head,root);
+//     }
+    
+       bool isSubPath(ListNode* head, TreeNode* root) {
+        if (!head) return true;
+        if (!root) return false;
+        return dfs(head, root) || isSubPath(head, root->left) || isSubPath(head, root->right);
+    }
+
+    bool dfs(ListNode* head, TreeNode* root) {
+        if (!head) return true;
+        if (!root) return false;
+        return head->val == root->val && (dfs(head->next, root->left) || dfs(head->next, root->right));
     }
 };
