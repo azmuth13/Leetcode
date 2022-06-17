@@ -32,7 +32,7 @@ public:
             return false;
         
         if(mp.find({head,root}) != mp.end())
-            return mp[{head,root}];
+             return mp[{head,root}];
         
         bool ans = false;
         
@@ -48,13 +48,12 @@ public:
         if(ans) return true;
         ans |= helper(store, root->right);
         if(ans) return true;
-        
+        //return ans;
         return mp[{head,root}] = ans;
     }
     
     bool isSubPath(ListNode* head, TreeNode* root) {
         store = head;
         return helper(head,root);
-        
     }
 };
