@@ -2,6 +2,7 @@ class Solution {
 public:
     
     vector <int> init;
+    vector <int> shuffled;
     
     Solution(vector<int>& nums) {
         
@@ -13,7 +14,7 @@ public:
     }
     
     vector<int> shuffle() {
-        
+
         vector <int> use = init;
         int i = 0;
         int n = use.size();
