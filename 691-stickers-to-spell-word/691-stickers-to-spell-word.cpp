@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int helper(string &tar, vector <vector <int> >& count, map <string,int>&dp)
+    int helper(string &tar, vector <vector <int> >& count, unordered_map <string,int>&dp)
     {
         if((int)tar.size() == 0)
             return 0;
@@ -37,7 +37,7 @@ public:
                 count[i][stickers[i][j] - 'a']++;
             }
         }
-        map <string, int> dp;
+        unordered_map <string, int> dp;
         int ans = helper(target,count,dp);
         if(ans == 1e9) ans = -1;
         return ans;
