@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int helper(string &tar, vector <vector <int> >& count, unordered_map <string,int>&dp)
+    int helper(string &tar, vector <vector <int> >& count, map <string,int>&dp)
     {
         if((int)tar.size() == 0)
             return 0;
@@ -13,6 +13,8 @@ public:
         
         for(int i = 0; i < count.size(); i++)
         {
+            if(!count[i][tar[0] - 'a'])
+                continue;
             vector <int> freq = count[i];
             string rem = "";
             for(int j = 0; j < tar.size(); j++)
@@ -20,7 +22,7 @@ public:
                 if(freq[tar[j]-'a']) freq[tar[j]-'a']--;
                 else rem += tar[j];
             }
-            if(rem != tar)
+ 
             ans = min(ans, 1 + helper(rem,count,dp));
         }
         
@@ -37,7 +39,8 @@ public:
                 count[i][stickers[i][j] - 'a']++;
             }
         }
-        unordered_map <string, int> dp;
+        
+        map <string, int> dp;
         int ans = helper(target,count,dp);
         if(ans == 1e9) ans = -1;
         return ans;
