@@ -1,61 +1,68 @@
 class Solution {
 public:
-    string shortestCommonSupersequence(string str1, string str2) {
+    
+    int helper(int i, int j, string &str1, string &str2, vector <vector <int> >&dp)
+    {
+        if(i == str1.size() || j == str2.size())
+        {
+            dp[i][j] = 0;
+            return 0;
+        }
+        if(dp[i][j] != -1)
+            return dp[i][j];
         
-        // shortest commom supersequence : all of the str1  + all of the str2 - Longest common subsequence between str1 and str2
+        if(str1[i] == str2[j])
+        {
+            return dp[i][j] = 1 + helper(i+1,j+1,str1,str2,dp);
+        }
+        else
+        {
+            return dp[i][j] = max(helper(i+1,j,str1,str2,dp), helper(i,j+1,str1,str2,dp));
+        }
+        
+        return 1e9;
+    }
+    
+    string shortestCommonSupersequence(string str1, string str2) {
+            
         int n = str1.size();
         int m = str2.size();
-        vector < vector <int> > dp(n+1, vector <int>(m+1,0));
-        int ans = 0;
-        for(int i = 1; i <= n; i++)
-        {
-            for(int j = 1; j <= m; j++)
-            {
-                if(str1[i-1] == str2[j-1])
-                {
-                    dp[i][j] = 1 + dp[i-1][j-1];
-                }
-                else
-                {
-                    dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
-                }
-                ans = max(ans, dp[i][j]);
-            }
-        }
+        vector < vector <int> > memo(n+1,vector <int> (m+1,-1));
+        int ans = helper(0,0,str1,str2,memo);
         
-//         for(int i = 0; i <= n; i++)
-//         {
-//             for(int j = 0; j <= m; j++)
-//             {
-//                 cout << dp[i][j] << " ";
-//             }
-//             cout << endl;
-//         }
-        
-        int x = n;
-        int y = m;
+        // for(int i = 0; i <= n; i++)
+        // {
+        //     for(int j = 0; j <= m; j++)
+        //     {
+        //         cout << memo[i][j] << " ";
+        //     }
+        //     cout << endl;
+        // }
         string lcs = "";
-        string sup = "";
-        while(x >= 1 && y >= 1)
+        
+        int i = 0, j = 0;
+        
+        while(i < n && j < m)
         {
-            if(dp[x][y] != dp[x-1][y] && dp[x][y] != dp[x][y-1])
+            if(str1[i] == str2[j] && memo[i][j] == 1 + memo[i+1][j+1])
             {
-                lcs += str1[x-1];
-                x--;
-                y--;   
+                lcs += str1[i];
+                i++,j++;
             }
-            else if(dp[x][y] == dp[x-1][y])
+            else if(memo[i][j] == memo[i+1][j])
             {
-                x--;
+                i++;
             }
-            else if(dp[x][y] == dp[x][y-1])
+            else if(memo[i][j] == memo[i][j+1])
             {
-                y--;
+                j++;
             }
         }
-        reverse(lcs.begin(),lcs.end());
         
-        int a=0, b =0;
+        string sup = "";
+            
+        int a = 0, b = 0;
+        
         for(int i = 0; i < lcs.size(); i++)
         {
             while(lcs[i] != str1[a])
@@ -67,10 +74,12 @@ public:
             {
                 sup += str2[b++];
             }
+            
             sup += lcs[i];
             a++,b++;
         }
-                
+        
         return sup + str1.substr(a) + str2.substr(b);
+        
     }
 };
