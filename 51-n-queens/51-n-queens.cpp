@@ -1,16 +1,16 @@
 class Solution {
 public:
     
-    bool hGood(vector <string> &board, int i, int j)
-    {
-        int n = board.size();
-        for(int k = 0; k < n; k++)
-        {
-            if(board[i][k] == 'Q')
-                return false;
-        }
-        return true;
-    }
+//     bool hGood(vector <string> &board, int i, int j)
+//     {
+//         int n = board.size();
+//         for(int k = 0; k < n; k++)
+//         {
+//             if(board[i][k] == 'Q')
+//                 return false;
+//         }
+//         return true;
+//     }
     
     
     bool vGood(vector <string> &board, int i, int j)
@@ -73,7 +73,7 @@ public:
         {
             if(board[i][j] == '.')
             {
-                if(hGood(board,i,j) && vGood(board,i,j) && dsGood(board,i,j))
+                if(vGood(board,i,j) && dsGood(board,i,j))
                 {
                     board[i][j] = 'Q';
                     helper(n,board,i+1);
