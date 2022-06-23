@@ -16,7 +16,7 @@ public:
     bool vGood(vector <string> &board, int i, int j)
     {
         int n = board.size();
-        for(int k = 0; k < n; k++)
+        for(int k = 0; k < i; k++)
         {
             if(board[k][j] == 'Q')
                 return false;
@@ -35,12 +35,12 @@ public:
             a--,b--;
         }
         
-        a = i+1,b = j+1;
-        while(a < n && b < n)
-        {
-            if(board[a][b] == 'Q') return false;
-            a++,b++;
-        }
+        // a = i+1,b = j+1;
+        // while(a < n && b < n)
+        // {
+        //     if(board[a][b] == 'Q') return false;
+        //     a++,b++;
+        // }
         
         
         a = i-1,b= j+1;
@@ -50,12 +50,12 @@ public:
             a--,b++;
         }
         
-        a = i+1,b = j-1;
-        while(a < n && b >= 0)
-        {
-            if(board[a][b] == 'Q') return false;
-            a++,b--;
-        }
+        // a = i+1,b = j-1;
+        // while(a < n && b >= 0)
+        // {
+        //     if(board[a][b] == 'Q') return false;
+        //     a++,b--;
+        // }
         return true;
     }
     
