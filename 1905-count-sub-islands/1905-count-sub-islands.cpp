@@ -1,3 +1,5 @@
+int dx[4] = {-1,1,0,0};
+        int dy[4] = {0,0,-1,1};
 class Solution {
 public:
     
@@ -19,8 +21,7 @@ public:
         
         grid2[i][j] = 2;
         
-        int dx[4] = {-1,1,0,0};
-        int dy[4] = {0,0,-1,1};
+        
         
         for(int d = 0; d < 4; d++)
         {
