@@ -1,7 +1,7 @@
 class Solution {
 public:
     int memo[10][2][2][1024];
-    int helper(string &s, int i, int f, int c, int mask)
+    int unique(string &s, int i, int f, int c, int mask)
     {
         if(i >= s.size())
         {
@@ -20,12 +20,12 @@ public:
         
         if(!c)
         {
-            ans += helper(s,i+1,1,c,mask);
+            ans += unique(s,i+1,1,c,mask);
             
             for(int j = 1; j <= up; j++)
             {
                 if(mask&(1<<j)) continue;
-                ans += helper(s,i+1,f||(j < up),1,mask|(1<<j));
+                ans += unique(s,i+1,f||(j < up),1,mask|(1<<j));
             }
         }
         else
@@ -33,7 +33,7 @@ public:
             for(int j = 0; j <= up; j++)
             {
                 if(mask&(1<<j)) continue;
-                ans += helper(s,i+1,f||(j < up),1,mask|(1<<j));
+                ans += unique(s,i+1,f||(j < up),1,mask|(1<<j));
             }
         }
         return memo[i][f][c][mask] = ans;
@@ -44,7 +44,7 @@ public:
         string s = to_string(n);
         int mask = 0;
         memset(memo,-1,sizeof memo);
-        int ans = helper(s,0,0,0,mask);
+        int ans = unique(s,0,0,0,mask);
         return n - ans;
     }
 };
