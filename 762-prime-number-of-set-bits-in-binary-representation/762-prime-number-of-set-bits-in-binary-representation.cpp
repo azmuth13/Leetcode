@@ -2,6 +2,7 @@
 class Solution {
 public:
     vector <int> prime;
+    
     int memo[32][2][2][32];
     
     int helper(string &a, string &b, int i, int down, int up, int cnt)
@@ -37,19 +38,8 @@ public:
     int countPrimeSetBits(int left, int right) {
         
         string a,b;
-        prime.resize(33,0);
-        prime[2] = 1;
-        prime[3] = 1;
-        prime[5] = 1;
-        prime[7] = 1;
-        prime[11] = 1;
-        prime[13] = 1;
-        prime[17] = 1;
-        prime[19] = 1;
-        prime[23] = 1;
-        prime[29] = 1;
-        prime[31] = 1;
-
+        markPrimes();
+        
         while(left)
         {
             a += '0' + left%2;
@@ -74,5 +64,21 @@ public:
         memset(memo,-1,sizeof memo);
         int ans = helper(a,b,0,0,0,0);
         return ans;
+    }
+    
+    void markPrimes()
+    {
+        prime.resize(33,0);
+        prime[2] = 1;
+        prime[3] = 1;
+        prime[5] = 1;
+        prime[7] = 1;
+        prime[11] = 1;
+        prime[13] = 1;
+        prime[17] = 1;
+        prime[19] = 1;
+        prime[23] = 1;
+        prime[29] = 1;
+        prime[31] = 1;
     }
 };
