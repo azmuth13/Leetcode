@@ -9,8 +9,9 @@ public:
         {
             if(c[i] >= h)
                 val++;
+            if(val >=h ) return 1;
         }
-        return (val >= h);
+        return 0;
     }
     
     int hIndex(vector<int>& c) {
