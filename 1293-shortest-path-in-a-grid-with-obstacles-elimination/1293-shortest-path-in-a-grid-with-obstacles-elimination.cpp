@@ -25,9 +25,6 @@ public:
                 
                 int x = vv[0], y = vv[1], steps = vv[2],ele = vv[3];
                 
-                if(!good(x,y,n,m))
-                    continue;
-                
                 if(x==n-1 && y==m-1)return steps;
                 
                 if(grid[x][y] == 1)
@@ -47,7 +44,8 @@ public:
                 {
                     int nx = x + dx[d];
                     int ny = y + dy[d];
-                    
+                    if(!good(nx,ny,n,m))
+                        continue;
                     q.push({nx,ny,steps+1,ele});
                 }
             }
