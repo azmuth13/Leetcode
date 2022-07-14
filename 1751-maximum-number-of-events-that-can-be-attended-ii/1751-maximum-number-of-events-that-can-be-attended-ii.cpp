@@ -32,10 +32,9 @@ public:
         if(i >= events.size()) return 0;
         if(k == 0) return 0;
         
-        if(memo[i][k] != -1)
-            return memo[i][k];
-        // base cases end
+        if(memo[i][k] != -1) return memo[i][k];
         
+        // base cases end
         
         
         // select this event
@@ -60,10 +59,10 @@ public:
         sort(events.begin(), events.end());
         
         int ans = helper(events, k, 0, memo);
-//         for(int i = 0; i <= n; i++)
-//             delete (memo[i]);
+        for(int i = 0; i <= n; i++)
+            delete[] memo[i];
         
-//         delete (memo);
+        delete[] memo;
         
         return ans;
         
