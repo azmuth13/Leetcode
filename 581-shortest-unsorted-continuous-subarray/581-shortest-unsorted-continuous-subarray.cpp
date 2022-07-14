@@ -1,57 +1,56 @@
 class Solution {
 public:
     int findUnsortedSubarray(vector<int>& nums) {
-        stack <int> st;
-        
         int n = nums.size();
-        int ind1 = 1e9, ind2 = -1e9;
+        int l = 1e9;
+        int r = -1e9;
         
-        for(int i = 0; i < n; i++)
+        stack <int> st;
+        int i = 0;
+        
+        while(i < n)
         {
             if(st.empty())
             {
                 st.push(i);
             }
-            else if(nums[st.top()] <= nums[i])
-            {
-                st.push(i);
-            }
             else
             {
-                while(st.size() && nums[st.top()] > nums[i])
+                while(!st.empty() && nums[st.top()] > nums[i])
                 {
-                    ind1 = min(ind1, st.top());
+                    l = min(l, st.top());
                     st.pop();
                 }
+                st.push(i);
             }
+            i++;
         }
         
-        while(st.size())
+        while(!st.empty())
             st.pop();
-        
-        for(int i = n-1; i >=0; i--)
+        i = n-1;
+        while(i >= 0)
         {
             if(st.empty())
             {
                 st.push(i);
             }
-            else if(nums[st.top()] >= nums[i])
-            {
-                st.push(i);
-            }
             else
             {
-                while(st.size() && nums[st.top()] < nums[i])
+                while(!st.empty() && nums[st.top()] < nums[i])
                 {
-                    ind2 = max(ind2, st.top());
+                    r = max(r, st.top());
                     st.pop();
                 }
+                st.push(i);
             }
+            i--;
         }
         
-        if(ind1+ind2==0) return 0;
         
-        return max(0,ind2-ind1+1);
+        if(l == 1e9 && r == -1e9)
+            return 0;
         
+        return max(0,r-l+1);
     }
 };
