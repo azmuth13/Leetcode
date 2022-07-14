@@ -59,10 +59,10 @@ public:
         sort(events.begin(), events.end());
         
         int ans = helper(events, k, 0, memo);
-        for(int i = 0; i <= n; i++)
-            delete[] memo[i];
+//         for(int i = 0; i <= n; i++)
+//             delete[] memo[i];
         
-        delete[] memo;
+//         delete[] memo;
         
         return ans;
         
