@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int memo[200005];
+    int memo[1001];
     int helper(vector<int>& nums, int target)
     {
         if(target==0)
