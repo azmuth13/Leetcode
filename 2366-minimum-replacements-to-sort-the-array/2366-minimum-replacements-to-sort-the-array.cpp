@@ -17,6 +17,7 @@ public:
                     times = nums[i]/ahead;
                 else
                     times = nums[i]/ahead + 1;
+                // cout << times << ' ' << times * ahead << ' ' << nums[i] << endl;
                 ahead = nums[i]/times;
                 cnt += times-1;
             }
