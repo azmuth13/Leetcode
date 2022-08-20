@@ -2,7 +2,7 @@ class Solution {
 public:
     int uniqueLetterString(string s) {
         int n = s.size();
-        map <char, vector <int> > mp;
+        unordered_map <char, vector <int> > mp;
         for(char ch = 'A'; ch <= 'Z'; ch++)
         {
             mp[ch].push_back(-1e9);
@@ -35,11 +35,6 @@ public:
             
             it = lower_bound(mp[s[i]].begin(), mp[s[i]].end(), i);
             
-//             if(it == mp[s[i]].begin())
-//             {
-//                 cout << "YES" << ' ' << i << ' ' << s[i] << endl;
-//                 return 0;
-//             }
             
             it--;
             
