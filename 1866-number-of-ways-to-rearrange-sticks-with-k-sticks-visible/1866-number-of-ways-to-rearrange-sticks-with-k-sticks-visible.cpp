@@ -1,8 +1,9 @@
 
-long long dp[1001][1001] = {};
+
 class Solution {
 public:
     int mod = 1e9 + 7;
+    long long dp[1001][1001] = {};
     int helper(int n, int k)
     {
         if(n==k)
