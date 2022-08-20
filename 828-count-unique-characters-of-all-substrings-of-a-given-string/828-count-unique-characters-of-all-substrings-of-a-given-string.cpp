@@ -22,12 +22,6 @@ public:
             auto it = lower_bound(mp[s[i]].begin(), mp[s[i]].end(), i+1);
             int right, left;
             
-            if(it == mp[s[i]].end())
-            {
-                cout << "YES\n";
-                return 0;
-            }
-         
             if(*it == 1e9)
                 right = n;
             else
@@ -35,13 +29,13 @@ public:
             
             it = lower_bound(mp[s[i]].begin(), mp[s[i]].end(), i);
             
-            
             it--;
             
             if(*it == -1e9)
                 left = -1;
             else
                 left = *it;
+            
             int lenL = i-left;
             int lenR = right-i;
             ans += lenL*lenR;
