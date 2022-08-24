@@ -7,7 +7,9 @@ public:
         
         if(n < 0)
             return false;
-        
-        return (1162261467%n == 0);
+        long long res = 1;
+        while(res < INT_MAX)
+            res = res * 3;
+        return (res%n == 0);
     }
 };
