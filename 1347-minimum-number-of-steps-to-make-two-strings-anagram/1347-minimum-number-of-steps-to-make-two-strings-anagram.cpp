@@ -4,10 +4,10 @@ public:
         int a[26] = {};
         int b[26] = {};
         
-        for(auto m : s)
+        for(auto &m : s)
             a[m-'a']++;
         
-        for(auto r : t)
+        for(auto &r : t)
             b[r-'a']++;
         
         int ans = 0;
