@@ -11,7 +11,7 @@ public:
     }
     
     vector<string> subdomainVisits(vector<string>& cpdomains) {
-        map <string, int> mp;
+        unordered_map <string, int> mp;
         
         for(auto &x : cpdomains)
         {
