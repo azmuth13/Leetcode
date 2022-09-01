@@ -11,24 +11,24 @@
  */
 class Solution {
 public:
-    int ans;
     
-    void helper(TreeNode* root, int maxi)
+    int helper(TreeNode* root, int maxi)
     {
         if(!root)
-            return;
+            return 0;
         
-        helper(root->left, max(maxi, root->val));
-        helper(root->right, max(maxi, root->val));
-        
+        int a = helper(root->left, max(maxi, root->val));
+        int b = helper(root->right, max(maxi, root->val));
+        int c = 0;;
         if(root->val >= maxi)
-            ans++;
+            c++;
+        return a + b + c;
     }
     
     int goodNodes(TreeNode* root) {
-        ans = 0;
+        int ans = 0;
         int maxi = -1e5;
-        helper(root,maxi);
+        ans = helper(root,maxi);
         return ans;
     }
 };
