@@ -24,11 +24,34 @@ public:
             c++;
         return a + b + c;
     }
-    
+        
+    void fun(TreeNode *root,int maxvalue,int &cnt)
+    {
+        if(root==NULL)
+        return ;
+        
+        if(maxvalue<=root->val)
+          cnt++;
+        
+        maxvalue=max(maxvalue,root->val);
+        
+        fun(root->left,maxvalue,cnt);
+        fun(root->right,maxvalue,cnt);
+    }
+
+
     int goodNodes(TreeNode* root) {
-        int ans = 0;
-        int maxi = -1e5;
-        ans = helper(root,maxi);
-        return ans;
+        // int ans = 0;
+        // int maxi = -1e5;
+        // ans = helper(root,maxi);
+        // return ans;
+        
+        if(root==NULL)
+         return 0;
+
+       int cnt=0;    
+       fun(root,root->val,cnt);
+         return cnt;       
+
     }
 };
