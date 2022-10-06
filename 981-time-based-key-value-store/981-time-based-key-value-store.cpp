@@ -1,7 +1,7 @@
 class TimeMap {
 public:
-        map <string , vector <int> > mp;
-        map <int, string> timeVal;
+        unordered_map <string , vector <int> > mp;
+        unordered_map <int, string> timeVal;
     TimeMap() {
         
     }
