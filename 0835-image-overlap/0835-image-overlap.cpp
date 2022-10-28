@@ -21,10 +21,13 @@ public:
         {
             for(int j = 0; j < vec_b.size(); j++)
             {
-                int val = mp[{vec_a[i].first - vec_b[j].first, vec_a[i].second - vec_b[j].second}]++;
-                val++;
-                ans = max(ans, val);
+                mp[{vec_a[i].first - vec_b[j].first, vec_a[i].second - vec_b[j].second}]++;
             }
+        }
+        
+        for(auto &x : mp)
+        {
+            ans = max(ans, x.second);
         }
         return ans;
     }
